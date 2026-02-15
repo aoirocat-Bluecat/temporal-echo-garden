@@ -270,9 +270,6 @@ function updatePlayer(){
 
 function physics(){
 
-  if(playerDead) return; // Stop all collision effects after death
-
-
   echoes.forEach(e=>{
 
     if(e.eaten)return;
@@ -684,37 +681,6 @@ function updateTitle(){
   }
 
 }
-
-
-
-
-// ===== FREEZE SIZE DISPLAY AFTER DEATH =====
-let deathSize = null;
-
-const originalCheckPlayerDeath2 = checkPlayerDeath;
-checkPlayerDeath = function(){
-
-  if(player.size <= 2 && !playerDead){
-    deathSize = player.size;
-  }
-
-  originalCheckPlayerDeath2();
-};
-
-const originalUpdateSizeDisplay = update;
-update = (function(orig){
-
-  return function(){
-
-    orig();
-
-    if(playerDead && deathSize !== null){
-      size.textContent = deathSize.toFixed(1);
-    }
-
-  };
-
-})(update);
 
 
 </script>
